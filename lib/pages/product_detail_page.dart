@@ -18,9 +18,22 @@ class ProductDetailPage extends StatelessWidget {
             Container(
               height: 300,
               width: double.infinity,
-              child: Image.network(
-                product.imageUrl,
-                fit: BoxFit.cover,
+              child: Hero(
+                tag: product.id,
+                child: Image.network(
+                  product.imageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment(0, 0.8),
+                  end: Alignment(0, 0),
+                  colors: [
+                    Color.fromRGBO(0, 0, 0, 0.6),
+                    Color.fromRGBO(0, 0, 0, 0),
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -43,7 +56,7 @@ class ProductDetailPage extends StatelessWidget {
                 product.description,
                 textAlign: TextAlign.center,
               ),
-            )
+            ),
           ],
         ),
       ),
