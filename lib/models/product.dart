@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shop/utils/constants.dart';
@@ -26,15 +25,15 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> toggleFavourite() async {
+  Future<void> toggleFavourite(String token, String userId) async {
     try {
       _toggleFavourite();
 
-      final response = await http.patch(
-        Uri.parse('${Constants.PRODUCT_BASE_URL}/$id.json'),
-        body: jsonEncode({
-          "isFavorite": isFavorite,
-        }),
+      final response = await http.put(
+        Uri.parse(
+          '${Constants.USER_FAVORITES_URL}/$userId/$id.json?auth=$token',
+        ),
+        body: jsonEncode(isFavorite),
       );
 
       if (response.statusCode >= 400) {
